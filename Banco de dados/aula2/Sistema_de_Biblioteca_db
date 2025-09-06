@@ -1,0 +1,28 @@
+CREATE TABLE Livro (
+	idLivro  SERIAL PRIMARY KEY,
+	titulo   VARCHAR (200) NOT NULL,
+	anoPublicacao  INT
+);
+
+CREATE TABLE Autor (
+	idAutor  SERIAL PRIMARY KEY,
+	nome VARCHAR(150) NOT NULL,
+	nacionalidade VARCHAR(100)
+);
+
+CREATE TABLE Cliente (
+	idCliente SERIAL PRIMARY KEY,
+	nome VARCHAR(150) NOT NULL,
+	email VARCHAR(150) UNIQUE,
+	telefone  VARCHAR(20)
+);
+
+CREATE TABLE Empréstimo (
+	idEmprestimo  SERIAL PRIMARY KEY,
+	dataEmprestimo DATE NOT NULL DEFAULT CURRENT_DATE,
+	dataDevolucao DATE,
+	idCliente INT NOT NULL,
+	CONSTRAINT fk_esmprestimo_cliente
+		FOREIGN KEY (idCliente) REFERENCES Cliente(idCliente)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
