@@ -26,3 +26,38 @@ CREATE TABLE Empréstimo (
 		FOREIGN KEY (idCliente) REFERENCES Cliente(idCliente)
 		ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+CREATE TABLE LivroAutor(
+	idLivro INT NOT NULL,
+	idAutor INT NOT NULL,
+	PRIMARY KEY (idLivro, idAutor),
+	CONSTRAINT fk_livroautor_livro FOREIGN KEY (idLivro)REFERENCES Livro(idLivro) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT fk_livroautor_autor FOREIGN KEY (idAutor)REFERENCES Autor(idAutor) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE EmprestimoLivro (
+    idEmprestimo INT NOT NULL,
+    idLivro      INT NOT NULL,
+    PRIMARY KEY (idEmprestimo, idLivro),
+    CONSTRAINT fk_emplivro_emprestimo FOREIGN KEY (idEmprestimo) REFERENCES Emprestimo(idEmprestimo) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_emplivro_livro FOREIGN KEY (idLivro) REFERENCES Livro(idLivro) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+INSERT INTO Livro (titulo, anoPublicacao, isbn) VALUES
+('Dom Casmurro', 1899, '9788572327421'),
+('O Alquimista', 1988, '9788576653724'),
+('Capitães da Areia', 1937, '9788520933106');
+
+INSERT INTO Autor (nome, nacionalidade) VALUES
+('Machado de Assis', 'Brasileiro'),
+('Paulo Coelho', 'Brasileiro'),
+('Jorge Amado', 'Brasileiro');
+
+INSERT INTO LivroAutor (idLivro, idAutor) VALUES
+(1, 1),  -- Dom Casmurro - Machado de Assis
+(2, 2),  -- O Alquimista - Paulo Coelho
+(3, 3);  -- Capitães da Areia - Jorge Amado
+
+INSERT INTO Cliente (nome, email, telefone) VALUES
+('Aline Oliveira', 'aline@email.com', '11988887777'),
+('João Santos', 'joao@email.com', '11999996666');
