@@ -3,7 +3,7 @@ class Carro {
     modelo: string = "";
 
     setMarca(marca: string): void {
-        this.marca = this.marca;
+        this.marca = marca;
     }
 
     setModelo(modelo: string): void{
@@ -23,4 +23,5 @@ car1.setModelo("Uno");
 car1.setMarca("Fiat");
 car.print();
 car1.print();
+
 
